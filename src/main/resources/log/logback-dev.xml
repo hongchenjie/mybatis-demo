@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!--应用名-->
+    <property name="APP_NAME" value="mybatis" />
+    <!--日志根目录-->
+    <property name="LOG_HOME" value="/log" />
+
+    <!--数据库日志-->
+    <appender name="dbLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>debug</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY </onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <FileNamePattern>${LOG_HOME}/${APP_NAME}/${APP_NAME}-db.%d{yyyy-MM-dd}-%i.log</FileNamePattern>
+            <maxHistory>30</maxHistory>
+            <!-- 触发策略，达到一定条件时将通知appender，触发滚动 -->
+            <maxFileSize>500MB</maxFileSize>
+        </rollingPolicy>
+        <encoder>
+            <Pattern>
+                %d{yyyy-MM-dd} %d{HH:mm:ss.SSS},${APP_NAME},%p,[%thread],[%C.%M\(%L\)],%msg %n
+            </Pattern>
+        </encoder>
+    </appender>
+
+    <!--系统info日志-->
+    <appender name="infoLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY </onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <FileNamePattern>${LOG_HOME}/${APP_NAME}/${APP_NAME}-info.%d{yyyy-MM-dd}-%i.log</FileNamePattern>
+            <maxHistory>30</maxHistory>
+            <!-- 触发策略，达到一定条件时将通知appender，触发滚动 -->
+            <maxFileSize>500MB</maxFileSize>
+        </rollingPolicy>
+        <encoder>
+            <Pattern>
+                %d{yyyy-MM-dd} %d{HH:mm:ss.SSS},${APP_NAME},%p,[%thread],[%C.%M\(%L\)],%msg %n
+            </Pattern>
+        </encoder>
+    </appender>
+
+    <!--系统warn日志-->
+    <appender name="systemWarn" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY </onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <FileNamePattern>${LOG_HOME}/${APP_NAME}/${APP_NAME}-warn.%d{yyyy-MM-dd}-%i.log</FileNamePattern>
+            <maxHistory>30</maxHistory>
+            <!-- 触发策略，达到一定条件时将通知appender，触发滚动 -->
+            <maxFileSize>500MB</maxFileSize>
+        </rollingPolicy>
+        <encoder>
+            <Pattern>
+                %d{yyyy-MM-dd} %d{HH:mm:ss.SSS},${APP_NAME},%p,[%thread],[%C.%M\(%L\)],%msg %n
+            </Pattern>
+        </encoder>
+    </appender>
+
+    <!--错误日志-->
+    <appender name="systemError" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY </onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <FileNamePattern>${LOG_HOME}/${APP_NAME}/${APP_NAME}-error.%d{yyyy-MM-dd}-%i.log</FileNamePattern>
+            <maxHistory>30</maxHistory>
+            <!-- 触发策略，达到一定条件时将通知appender，触发滚动 -->
+            <maxFileSize>500MB</maxFileSize>
+        </rollingPolicy>
+        <encoder>
+            <Pattern>%d{yyyy-MM-dd} %d{HH:mm:ss.SSS},${APP_NAME},%p,[%thread],[%C.%M\(%L\)],%msg %n</Pattern>
+        </encoder>
+    </appender>
+
+
+    <!--第三方日志-->
+    <appender name="externalLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY </onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <FileNamePattern>${LOG_HOME}/${APP_NAME}/external.%d{yyyy-MM-dd}-%i.log</FileNamePattern>
+            <maxHistory>30</maxHistory>
+            <!-- 触发策略，达到一定条件时将通知appender，触发滚动 -->
+            <maxFileSize>500MB</maxFileSize>
+        </rollingPolicy>
+        <encoder>
+            <Pattern>
+                %d{yyyy-MM-dd} %d{HH:mm:ss.SSS},${APP_NAME},%p,[%thread],[%C.%M\(%L\)],%msg %n
+            </Pattern>
+        </encoder>
+    </appender>
+
+    <!--开发控制台-->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder charset="UTF-8">
+            <pattern>%d{yyyy-MM-dd} %d{HH:mm:ss.SSS},${APP_NAME},%p,[%thread],[%C.%M\(%L\)]\t-\t%msg %n</pattern>
+        </encoder>
+    </appender>
+
+    <!--mapper的包，分环境配置生效。dev打印sql，去掉这个配置即可-->
+    <logger name="org.study.mybatis.dao.mapper" level="debug" additivity="false">
+        <appender-ref ref="console"/>
+    </logger>
+
+    <logger name="org.study.mybatis" level="info">
+        <appender-ref ref="infoLog"/>
+    </logger>
+
+    <root name="org.study.mybatis" level="WARN">
+        <appender-ref ref="systemWarn" />
+    </root>
+
+    <!-- 所有的异常，打印到error -->
+    <root level="ERROR">
+        <appender-ref ref="systemError" />
+    </root>
+
+    <logger name="org.galaxy.pegasus.log.ExternalLogBuilder">
+        <appender-ref ref="externalLog"/>
+    </logger>
+
+    <!--TODO 此处改为自身应用系统的包名 线上使用info及以上级别-->
+    <root level="info">
+        <appender-ref ref="console" />
+    </root>
+
+</configuration>

@@ -1,0 +1,9 @@
+spring:
+  profiles:
+    active: dev
+
+
+mybatis:
+  mapper.locations.fun: classpath*:mapping/*.xml
+  type.aliases.package.fun: org.study.mybatis.dao.entity
+
