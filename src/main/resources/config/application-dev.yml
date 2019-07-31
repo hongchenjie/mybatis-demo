@@ -33,3 +33,4 @@ logging:
 #3.log4j2使用yml失效，报错ERROR StatusLogger No log4j2 configuration file found. Using default configuration: logging only err，使用xml生效
 #4.logging.config可以指定log4j2，logback也可以
 #5.看external libraries中有无logback依赖，一般在最上面，如果有，说明还有其他依赖包，依赖了logback，spring-boot-starter-logging里面就是logback依赖
+#6.如果同时有logback和log4j2依赖，优先使用logback
