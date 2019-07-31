@@ -21,7 +21,7 @@
         </rollingPolicy>
         <encoder>
             <Pattern>
-                %d{yyyy-MM-dd} %d{HH:mm:ss.SSS},${APP_NAME},%p,[%thread],[%C.%M\(%L\)],%msg %n
+                %d{yyyy-MM-dd} %d{HH:mm:ss.SSS}\t${APP_NAME}\t%p\t[%thread]\t[%C.%M\(%L\)]\t--\t%msg %n
             </Pattern>
         </encoder>
     </appender>
@@ -41,7 +41,7 @@
         </rollingPolicy>
         <encoder>
             <Pattern>
-                %d{yyyy-MM-dd} %d{HH:mm:ss.SSS},${APP_NAME},%p,[%thread],[%C.%M\(%L\)],%msg %n
+                %d{yyyy-MM-dd} %d{HH:mm:ss.SSS}\t${APP_NAME}\t%p\t[%thread]\t[%C.%M\(%L\)]\t--\t%msg %n
             </Pattern>
         </encoder>
     </appender>
@@ -61,7 +61,7 @@
         </rollingPolicy>
         <encoder>
             <Pattern>
-                %d{yyyy-MM-dd} %d{HH:mm:ss.SSS},${APP_NAME},%p,[%thread],[%C.%M\(%L\)],%msg %n
+                %d{yyyy-MM-dd} %d{HH:mm:ss.SSS}\t${APP_NAME}\t%p\t[%thread]\t[%C.%M\(%L\)]\t--\t%msg %n
             </Pattern>
         </encoder>
     </appender>
@@ -80,7 +80,7 @@
             <maxFileSize>500MB</maxFileSize>
         </rollingPolicy>
         <encoder>
-            <Pattern>%d{yyyy-MM-dd} %d{HH:mm:ss.SSS},${APP_NAME},%p,[%thread],[%C.%M\(%L\)],%msg %n</Pattern>
+            <Pattern>%d{yyyy-MM-dd} %d{HH:mm:ss.SSS}\t${APP_NAME}\t%p\t[%thread]\t[%C.%M\(%L\)]\t--\t%msg %n</Pattern>
         </encoder>
     </appender>
 
@@ -100,7 +100,7 @@
         </rollingPolicy>
         <encoder>
             <Pattern>
-                %d{yyyy-MM-dd} %d{HH:mm:ss.SSS},${APP_NAME},%p,[%thread],[%C.%M\(%L\)],%msg %n
+                %d{yyyy-MM-dd} %d{HH:mm:ss.SSS}\t${APP_NAME}\t%p\t[%thread]\t[%C.%M\(%L\)]\t--\t%msg %n
             </Pattern>
         </encoder>
     </appender>
@@ -108,11 +108,11 @@
     <!--开发控制台-->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder charset="UTF-8">
-            <pattern>%d{yyyy-MM-dd} %d{HH:mm:ss.SSS},${APP_NAME},%p,[%thread],[%C.%M\(%L\)]\t-\t%msg %n</pattern>
+            <pattern>%d{yyyy-MM-dd} %d{HH:mm:ss.SSS}\t${APP_NAME}\t%p\t[%thread]\t[%C.%M\(%L\)]\t--\t%msg %n</pattern>
         </encoder>
     </appender>
 
-    <!--mapper的包，分环境配置生效。dev打印sql，去掉这个配置即可-->
+    <!--mapper所在的包，分环境配置生效。dev打印sql，去掉这个配置即可-->
     <logger name="org.study.mybatis.dao.mapper" level="debug" additivity="false">
         <appender-ref ref="console"/>
     </logger>

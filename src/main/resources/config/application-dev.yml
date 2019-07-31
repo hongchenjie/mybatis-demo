@@ -21,5 +21,15 @@ spring:
       maxOpenPreparedStatements: 20
 
 #分环境配置不同的日志文件，生效
+#如果不指定日志配置文件，就默认使用logback.xml
+#如果不指定日志配置文件，也没有logback.xml，就使用boot自带的base.xml，同一行日志分颜色打印
+#使用logback，不需要依赖啥，spring-boot-starter-web自带依赖了
 logging:
-  config: classpath:log/logback-dev.xml
+   config: classpath:log/logback-dev.xml
+#   config: classpath:log4j/log4j2-dev.xml
+#使用log4j
+#1.spring-boot-starter-web依赖去掉spring-boot-starter-logging，里面是logback的依赖
+#2.spring-boot-starter-log4j2依赖
+#3.log4j2使用yml失效，报错ERROR StatusLogger No log4j2 configuration file found. Using default configuration: logging only err，使用xml生效
+#4.logging.config可以指定log4j2，logback也可以
+#5.看external libraries中有无logback依赖，一般在最上面，如果有，说明还有其他依赖包，依赖了logback，spring-boot-starter-logging里面就是logback依赖

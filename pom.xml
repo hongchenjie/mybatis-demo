@@ -16,10 +16,32 @@
     </parent>
 
     <dependencies>
+        <!--logback和log4j2二选一，依赖互斥。我喜欢logback-->
+        <!--logback依赖 begin-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+        <!--logback依赖 end-->
+
+        <!--log4j2依赖 begin-->
+<!--        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            &lt;!&ndash;使用log4j的话，去掉logback依赖&ndash;&gt;
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-log4j2</artifactId>
+        </dependency>-->
+        <!--log4j2依赖 end-->
 
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -66,6 +88,8 @@
             <artifactId>mybatis-generator-core</artifactId>
             <version>1.3.5</version>
         </dependency>
+
+
     </dependencies>
 
 
@@ -113,7 +137,7 @@
                     <!-- 是否覆盖 -->
                     <overwrite>true</overwrite>
                     <!-- 自动生成的配置 -->
-                    <configurationFile>src/main/resources/mybatis-generator.xml</configurationFile>
+                    <configurationFile>src/main/resources/generator/mybatis-generator.xml</configurationFile>
                 </configuration>
             </plugin>
         </plugins>
