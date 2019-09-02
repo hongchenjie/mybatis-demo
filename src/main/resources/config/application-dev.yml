@@ -1,24 +1,37 @@
+#application分环境配置文件的目录名必须是config，其他名字注入失败
 spring:
   datasource:
     fun:
       username: root
       password: 123456
-      driver-class-name: com.mysql.jdbc.Driver
-      jdbcUrl: jdbc:mysql://localhost:3306/test?allowMultiQueries=true&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;failOverReadOnly=false
+      driverClassName: com.mysql.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/test?allowMultiQueries=true&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;failOverReadOnly=false
+
+      # 配置Druid的其他参数，以下配置必须增加一个配置文件才能有效
       type: com.alibaba.druid.pool.DruidDataSource
-      filters: stat
-      maxActive: 20
+      # 初始化大小，最小，最大
       initialSize: 1
-      maxWait: 60000
       minIdle: 1
+      maxActive: 20
+      # 获取连接等待超时的时间
+      maxWait: 60000
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
       timeBetweenEvictionRunsMillis: 60000
+      # 配置一个连接在池中最小生存的时间，单位是毫秒
       minEvictableIdleTimeMillis: 300000
-      validationQuery: select 'x'
+      validationQuery: SELECT 1
       testWhileIdle: true
       testOnBorrow: false
       testOnReturn: false
       poolPreparedStatements: true
-      maxOpenPreparedStatements: 20
+      # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+      filters: stat, wall
+      # 打开PSCache，并且指定每个连接上PSCache的大小
+      maxPoolPreparedStatementPerConnectionSize: 20
+      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+      # 合并多个DruidDataSource的监控数据
+      useGlobalDataSourceStat: true
 
 #分环境配置不同的日志文件，生效
 #如果不指定日志配置文件，就默认使用logback.xml

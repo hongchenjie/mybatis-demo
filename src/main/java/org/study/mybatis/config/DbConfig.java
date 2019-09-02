@@ -16,8 +16,8 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import javax.sql.DataSource;
 
-@Configuration
-@MapperScan(basePackages = {"org.study.mybatis.dao.mapper"},sqlSessionTemplateRef = "funSqlSessionTemplate")
+//@Configuration
+//@MapperScan(basePackages = {"org.study.mybatis.dao.mapper"},sqlSessionTemplateRef = "funSqlSessionTemplate")
 public class DbConfig {
 
     @Autowired

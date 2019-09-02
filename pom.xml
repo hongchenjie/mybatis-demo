@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.study</groupId>
-    <artifactId>mybatis</artifactId>
+    <artifactId>mybatis-demo</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <parent>
