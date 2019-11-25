@@ -23,4 +23,9 @@ public class UserController {
         return pageInfo;
     }
 
+    @RequestMapping("transaction")
+    public Object transaction() {
+        return userService.transaction();
+    }
+
 }
