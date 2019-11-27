@@ -3,6 +3,7 @@ package org.study.mybatis.controller;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.study.mybatis.service.UserService;
@@ -16,16 +17,21 @@ public class UserController {
     private UserService userService;
 
     //http://localhost:8080/user/list?pageNum=1&pageSize=2
-    @RequestMapping("list")
+    @GetMapping("list")
     public Object list(PageForm form) {
         log.info(form.toString());
         PageInfo pageInfo = userService.list(form);
         return pageInfo;
     }
 
-    @RequestMapping("transaction")
+    @GetMapping("transaction")
     public Object transaction() {
         return userService.transaction();
+    }
+
+    @GetMapping("add")
+    public Object add() {
+        return userService.add();
     }
 
 }

@@ -11,6 +11,7 @@ import org.study.mybatis.dao.entity.User;
 import org.study.mybatis.dao.mapper.UserMapper;
 import org.study.mybatis.util.PageForm;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -28,14 +29,31 @@ public class UserService {
 
     @Autowired
     private TransactionTemplate transactionTemplate;
+    @Autowired
+    private UserService2 userService2;
+
+    public Object transaction2() {
+        for (int i = 0; i < 1; i++) {
+            try {
+                userService2.doTransaction();
+
+            } catch (Exception e) {
+                log.error(e.getMessage(), e);
+            }
+        }
+
+        return "ok";
+    }
 
     public Object transaction() {
         for (int i = 0; i < 1; i++) {
             try {
-                transactionTemplate.execute(tc -> {
+                //transactionTemplate.execute(tc -> {
+
                     doTransaction();
-                    return true;
-                });
+
+                //    return true;
+                //});
             } catch (Exception e) {
                 log.error(e.getMessage(), e);
             }
@@ -46,7 +64,7 @@ public class UserService {
     }
 
     //同类的方法调用，事务注解@Transactional不起作用，使用事务模版
-    //@Transactional(rollbackFor = Exception.class)
+    @Transactional(rollbackFor = Exception.class)
     public void doTransaction() {
         Date date = new Date();
         User user = new User();
@@ -61,6 +79,12 @@ public class UserService {
         user2.setCreateTime(date);
         userMapper.insertSelective(user2);
 
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public Object add() {
+        doTransaction();
+        return "ok";
     }
 
 }
