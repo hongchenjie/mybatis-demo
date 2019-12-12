@@ -11,6 +11,7 @@ import org.study.mybatis.dao.entity.User;
 import org.study.mybatis.dao.mapper.UserMapper;
 import org.study.mybatis.util.PageForm;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -87,4 +88,18 @@ public class UserService {
         return "ok";
     }
 
+    public Object insertList() {
+        List<User> list = new ArrayList<>();
+        User user = new User();
+        user.setName("insertList");
+        list.add(user);
+
+        User user2 = new User();
+        user2.setName("insertList2");
+        list.add(user2);
+
+        userMapper.insertList(list);
+
+        return "ok";
+    }
 }
