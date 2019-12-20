@@ -4,6 +4,7 @@ import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -77,6 +78,8 @@ public class DruidConfig {
         fb.setTypeAliasesPackage(env.getProperty("mybatis.type.aliases.package.fun"));// 指定基包
         fb.setMapperLocations(new PathMatchingResourcePatternResolver()
                 .getResources(env.getProperty("mybatis.mapper.locations.fun")));
+
+        fb.setPlugins(new Interceptor[]{new MybatisInterceptor()});
 
         return fb.getObject();
     }

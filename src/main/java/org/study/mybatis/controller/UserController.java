@@ -39,4 +39,9 @@ public class UserController {
         return userService.insertList();
     }
 
+    @GetMapping("interceptor")
+    public Object interceptor() {
+        return userService.interceptor();
+    }
+
 }

@@ -102,4 +102,8 @@ public class UserService {
 
         return "ok";
     }
+
+    public Object interceptor() {
+        return userMapper.list();
+    }
 }
