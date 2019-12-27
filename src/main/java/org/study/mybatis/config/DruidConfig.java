@@ -79,7 +79,7 @@ public class DruidConfig {
         fb.setMapperLocations(new PathMatchingResourcePatternResolver()
                 .getResources(env.getProperty("mybatis.mapper.locations.fun")));
 
-        fb.setPlugins(new Interceptor[]{new MybatisInterceptor()});
+        //fb.setPlugins(new Interceptor[]{new MybatisInterceptor()});
 
         return fb.getObject();
     }

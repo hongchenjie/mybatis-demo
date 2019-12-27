@@ -3,9 +3,8 @@ package org.study.mybatis.controller;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.study.mybatis.model.UserQuery;
 import org.study.mybatis.service.UserService;
 import org.study.mybatis.util.PageForm;
 
@@ -42,6 +41,11 @@ public class UserController {
     @GetMapping("interceptor")
     public Object interceptor() {
         return userService.interceptor();
+    }
+
+    @GetMapping("sqlInject")
+    public Object sqlInject(UserQuery query) {
+        return userService.sqlInject(query);
     }
 
 }

@@ -9,7 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionTemplate;
 import org.study.mybatis.dao.entity.User;
 import org.study.mybatis.dao.mapper.UserMapper;
+import org.study.mybatis.model.UserQuery;
 import org.study.mybatis.util.PageForm;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -105,5 +107,21 @@ public class UserService {
 
     public Object interceptor() {
         return userMapper.list();
+    }
+
+
+    /**
+     * tk不会sql注入，因为是预编译的，而且条件都用括号扩起来
+     * SELECT id,name,age,create_time,update_time FROM user WHERE ( name = ? )
+     * @param query
+     * @return
+     */
+    public Object sqlInject(UserQuery query) {
+        Example example = new Example(User.class);
+        //example.createCriteria().andEqualTo("name", "lipo");
+        example.createCriteria().andEqualTo("name", "' or 1=1#");
+        List<User> users = userMapper.selectByCondition(example);
+        log.info(users.toString());
+        return users;
     }
 }
