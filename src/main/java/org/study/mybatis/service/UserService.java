@@ -124,4 +124,34 @@ public class UserService {
         log.info(users.toString());
         return users;
     }
+
+    public Object addControllerTransactional() {
+        Date date = new Date();
+        User user = new User();
+        user.setName("addControllerTransactional");
+        user.setCreateTime(date);
+        userMapper.insertSelective(user);
+
+        int i = 1 / 0;
+
+        User user2 = new User();
+        user2.setName("addControllerTransactional2");
+        user2.setCreateTime(date);
+        userMapper.insertSelective(user2);
+
+        return "ok";
+    }
+
+    @Autowired
+    private OrderService orderService;
+
+    @Transactional
+    public void methodA() {
+        try{
+            orderService.methodB();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

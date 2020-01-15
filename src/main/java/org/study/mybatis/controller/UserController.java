@@ -3,11 +3,13 @@ package org.study.mybatis.controller;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.study.mybatis.model.UserQuery;
 import org.study.mybatis.service.UserService;
 import org.study.mybatis.util.PageForm;
 
+//@Transactional(rollbackFor = Exception.class)
 @RestController
 @RequestMapping("user")
 @Slf4j
@@ -46,6 +48,22 @@ public class UserController {
     @GetMapping("sqlInject")
     public Object sqlInject(UserQuery query) {
         return userService.sqlInject(query);
+    }
+
+    /**
+     * controller类加事务注解，也起作用的，可以回滚
+     * @return
+     */
+    @GetMapping("addControllerTransactional")
+    public Object addControllerTransactional() {
+        return userService.addControllerTransactional();
+    }
+
+
+    @GetMapping("methodA")
+    public Object methodA() {
+        userService.methodA();
+        return "ok";
     }
 
 }
