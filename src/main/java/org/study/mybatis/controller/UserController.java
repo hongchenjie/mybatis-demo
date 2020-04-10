@@ -9,6 +9,8 @@ import org.study.mybatis.model.UserQuery;
 import org.study.mybatis.service.UserService;
 import org.study.mybatis.util.PageForm;
 
+import java.util.Date;
+
 //@Transactional(rollbackFor = Exception.class)
 @RestController
 @RequestMapping("user")
@@ -64,6 +66,13 @@ public class UserController {
     public Object methodA() {
         userService.methodA();
         return "ok";
+    }
+
+    @PostMapping("/date")
+    public Object date(@RequestBody UserQuery query) {
+        Date inDate = query.getInDate();
+        System.out.println(inDate);
+        return inDate;
     }
 
 }

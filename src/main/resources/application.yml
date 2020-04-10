@@ -7,3 +7,5 @@ mybatis:
   mapper.locations.fun: classpath*:mapping/*.xml
   type.aliases.package.fun: org.study.mybatis.dao.entity
 
+server:
+  port: 9010

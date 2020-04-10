@@ -2,6 +2,8 @@ package org.study.mybatis.model;
 
 import lombok.Data;
 
+import java.util.Date;
+
 /**
  * @author lipo
  * @version v1.0
@@ -10,4 +12,5 @@ import lombok.Data;
 @Data
 public class UserQuery {
     private String name;
+    private Date inDate;
 }
