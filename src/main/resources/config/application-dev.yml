@@ -25,7 +25,8 @@ spring:
       testOnReturn: false
       poolPreparedStatements: true
       # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
-      filters: stat, wall
+      #filters: stat, wall #wall拦截器禁止flyway建表sql中有注释
+      filters: stat
       # 打开PSCache，并且指定每个连接上PSCache的大小
       maxPoolPreparedStatementPerConnectionSize: 20
       # 通过connectProperties属性来打开mergeSql功能；慢SQL记录

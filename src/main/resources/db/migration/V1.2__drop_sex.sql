@@ -1,0 +1,1 @@
+ALTER TABLE `user` drop COLUMN `sex`;

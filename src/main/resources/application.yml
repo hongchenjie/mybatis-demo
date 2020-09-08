@@ -1,7 +1,8 @@
 spring:
   profiles:
     active: dev
-
+  flyway:
+    baselineOnMigrate: true #项目进行后加入flyway，需要这个参数
 
 mybatis:
   mapper.locations.fun: classpath*:mapping/*.xml

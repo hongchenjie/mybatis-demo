@@ -16,6 +16,13 @@
     </parent>
 
     <dependencies>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>5.1.1</version>
+        </dependency>
+
+
         <!--logback和log4j2二选一，依赖互斥。我喜欢logback-->
         <!--logback依赖 begin-->
         <dependency>
